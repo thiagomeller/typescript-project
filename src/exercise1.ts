@@ -15,21 +15,23 @@ function exibirArea(largura: number, altura: number): void {
 console.log(exibirArea(10, 5)); // Saída: A área do retângulo é: 50 
 */
 
-class Rectangle {
-    private height: number;
-    private width: number;
+class Rectangle1 {
+  private height: number;
+  private width: number;
 
-    constructor(height: number, width: number) {
-        this.height = height,
-        this.width = width
-    }
+  constructor(height: number, width: number) {
+    (this.height = height), (this.width = width);
+  }
 
-    private calculateArea() {
-        return this.height * this.width
-    }
+  private calculateArea() {
+    return this.height * this.width;
+  }
 
-    public showArea() {
-        const area = this.calculateArea();
-        console.log(`A área do retângulo é: ${area}`)
-    }
+  public showArea() {
+    const area = this.calculateArea();
+    console.log(`A área do retângulo é: ${area}`);
+  }
 }
+
+const rectangle = new Rectangle1(10, 5);
+rectangle.showArea();

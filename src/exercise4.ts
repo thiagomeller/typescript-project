@@ -26,49 +26,65 @@ Teste o sistema criando algumas tarefas, marcando algumas como concluídas e exi
 */
 
 class Task {
-    private description: string;
-    private done: boolean;
+  private description: string;
+  private done: boolean;
 
-    constructor(description: string) {
-        this.description = description;
-        this.done = false;
-    }
+  constructor(description: string) {
+    this.description = description;
+    this.done = false;
+  }
 
-    public markAsDone() {
-        if (this.done) {
-            console.log('Tarefa já concluída')
-        } else {
-            this.done = true;
-            console.log('Tarefa concluída')
-        }
+  public markAsDone() {
+    if (this.done) {
+      console.log("Tarefa já concluída");
+    } else {
+      this.done = true;
+      console.log("Tarefa concluída");
     }
+  }
 
-    public showTask() {
-        return `${this.description} - Status: ${this.done ? 'Concluída' : 'Em andamento'};`
-    }
+  public showTask() {
+    return `${this.description} - Status: ${
+      this.done ? "Concluída" : "Em andamento"
+    };`;
+  }
 }
 
 class TaskManager {
-    private tasks: Task[] = [];
+  private tasks: Task[] = [];
 
-    public addTask(task: Task) {
-        this.tasks.push(task);
-    }
+  public addTask(task: Task) {
+    this.tasks.push(task);
+  }
 
-    public markTaskAsDone(taskIndex: number) {
-        const selectedTask = this.tasks[taskIndex - 1]
-        if (selectedTask) {
-            selectedTask.markAsDone();
-        } else {
-            console.log('Tarefa não existe')
-        }
+  public markTaskAsDone(taskIndex: number) {
+    const selectedTask = this.tasks[taskIndex - 1];
+    if (selectedTask) {
+      selectedTask.markAsDone();
+    } else {
+      console.log("Tarefa não existe");
     }
+  }
 
-    public showAllTasks() {
-        if (this.tasks.length > 0) {
-            this.tasks.map((task, index) => console.log(`${index + 1} - ${task.showTask()}.`))
-        } else {
-            console.log('Não há tarefas.')
-        }
+  public showAllTasks() {
+    if (this.tasks.length > 0) {
+      this.tasks.map((task, index) =>
+        console.log(`${index + 1} - ${task.showTask()}.`)
+      );
+    } else {
+      console.log("Não há tarefas.");
     }
+  }
 }
+
+const tarefa = new Task("Tarefa 1");
+const tarefa2 = new Task("Tarefa 2");
+const tarefa3 = new Task("Tarefa 3");
+const gerenciadorDeTarefas = new TaskManager();
+
+gerenciadorDeTarefas.addTask(tarefa);
+gerenciadorDeTarefas.addTask(tarefa2);
+gerenciadorDeTarefas.addTask(tarefa3);
+gerenciadorDeTarefas.markTaskAsDone(0);
+gerenciadorDeTarefas.markTaskAsDone(1);
+gerenciadorDeTarefas.showAllTasks();

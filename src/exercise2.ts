@@ -34,27 +34,32 @@ listarTarefas();
 */
 
 class ToDoList {
-    private tasks: string[] = [];
+  private tasks: string[] = [];
 
-    public addTask(task: string) {
-        this.tasks.push(task);
+  public addTask(task: string) {
+    this.tasks.push(task);
+  }
+
+  public removeTask(taskIndex: number) {
+    if (taskIndex >= 0 && taskIndex < this.tasks.length) {
+      const removedTask = this.tasks.splice(taskIndex, 1)[0];
+      console.log(`Tarefa "${removedTask}" removida.`);
+    } else {
+      console.log("Índice inválido.");
     }
+  }
 
-    public removeTask(taskIndex: number) {
-         if (taskIndex >= 0 && taskIndex < this.tasks.length) {
-            const removedTask = this.tasks.splice(taskIndex, 1)[0];
-            console.log(`Tarefa "${removedTask}" removida.`); 
-        } else {
-            console.log("Índice inválido.");
-        }
-
-    }
-
-    public listTasks() {
-        console.log("Lista de Tarefas:");
-        this.tasks.forEach((task, index) => {
-         console.log(`${index + 1}. ${task}`);
-        });
-    }
-
+  public listTasks() {
+    console.log("Lista de Tarefas:");
+    this.tasks.forEach((task, index) => {
+      console.log(`${index + 1}. ${task}`);
+    });
+  }
 }
+
+const myToDoList = new ToDoList();
+myToDoList.addTask("Estudar type");
+myToDoList.addTask("Estudar POO");
+myToDoList.listTasks();
+myToDoList.removeTask(0);
+myToDoList.listTasks();

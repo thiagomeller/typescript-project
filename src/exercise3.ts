@@ -54,79 +54,94 @@ sacar(123, 200);
 consultarSaldo(123);
 */
 
-
 class Account {
-    private number: number;
-    private balance: number;
+  private number: number;
+  private balance: number;
 
-    constructor(number: number, balance: number) {
-        this.balance = balance;
-        this.number = number;
+  constructor(number: number, balance: number) {
+    this.balance = balance;
+    this.number = number;
+  }
+
+  public getAccountNumber() {
+    return this.number;
+  }
+
+  public deposit(value: number) {
+    this.balance += value;
+    console.log(`${value} reais adicionados a conta`);
+  }
+
+  public withdraw(value: number) {
+    if (this.balance < value) {
+      console.log("Saldo insuficiente");
+    } else {
+      this.balance -= value;
+      console.log(`${value} reais removidos da conta`);
     }
+  }
 
-    public getAccountNumber() {
-        return this.number;
-    }
-
-    public deposit(value: number) {
-        this.balance += value;
-        console.log(`${value} reais adicionados a conta`);
-    }
-
-    public withdraw(value: number) {
-        if(this.balance < value) {
-            console.log('Saldo insuficiente');
-        } else {
-            this.balance -= value;
-            console.log(`${value} reais removidos da conta`);
-
-        }
-    }
-
-    public checkBalance() {
-        console.log(`Este é o saldo da conta: ${this.balance} reais`)
-    }
-
+  public checkBalance() {
+    console.log(`Este é o saldo da conta: ${this.balance} reais`);
+  }
 }
 
 class Bank {
-    private accounts: Account[] = [];
+  private accounts: Account[] = [];
 
-    public createAccount(number: number, initialBalance: number) {
-        if (this.accounts.find((account) => account.getAccountNumber() === number)) {
-            console.log(`Account already created!`);
-        } else {
-            const newAccount = new Account(number, initialBalance);
-            this.accounts.push(newAccount);
-            console.log(`Account ${number} created with initial balance ${initialBalance} reais`);
-        }
+  public createAccount(number: number, initialBalance: number) {
+    if (
+      this.accounts.find((account) => account.getAccountNumber() === number)
+    ) {
+      console.log(`Account already created!`);
+    } else {
+      const newAccount = new Account(number, initialBalance);
+      this.accounts.push(newAccount);
+      console.log(
+        `Account ${number} created with initial balance ${initialBalance} reais`
+      );
     }
+  }
 
-    public deposit(accountNumber: number, value: number) {
-        const account = this.accounts.find((account) => account.getAccountNumber() === accountNumber);
+  public deposit(accountNumber: number, value: number) {
+    const account = this.accounts.find(
+      (account) => account.getAccountNumber() === accountNumber
+    );
 
-        if(account) {
-            account.deposit(value);
-        } else {
-            console.log('Conta não encontrada')
-        }
+    if (account) {
+      account.deposit(value);
+    } else {
+      console.log("Conta não encontrada");
     }
-    
-    public withdraw(accountNumber: number, value: number) {
-        const account = this.accounts.find((account) => account.getAccountNumber() === accountNumber);
-        if(account) {
-            account.withdraw(value);
-        } else {
-            console.log('Conta não encontrada')
-        }
-    }
+  }
 
-    public checkBalance(accountNumber: number) {
-        const account = this.accounts.find((account) => account.getAccountNumber() === accountNumber);
-        if(account) {
-            account.checkBalance();
-        } else {
-            console.log('Conta não encontrada')
-        }
+  public withdraw(accountNumber: number, value: number) {
+    const account = this.accounts.find(
+      (account) => account.getAccountNumber() === accountNumber
+    );
+    if (account) {
+      account.withdraw(value);
+    } else {
+      console.log("Conta não encontrada");
     }
+  }
+
+  public checkBalance(accountNumber: number) {
+    const account = this.accounts.find(
+      (account) => account.getAccountNumber() === accountNumber
+    );
+    if (account) {
+      account.checkBalance();
+    } else {
+      console.log("Conta não encontrada");
+    }
+  }
 }
+
+const bank = new Bank();
+bank.createAccount(123, 500);
+bank.checkBalance(123);
+bank.deposit(123, 500);
+bank.checkBalance(123);
+bank.withdraw(123, 200);
+bank.checkBalance(123);
